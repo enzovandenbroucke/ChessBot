@@ -9,7 +9,7 @@ parser.add_argument("--port", type=int, default=8080)
 args = parser.parse_args()
 directory = Path(__file__).resolve().parents[1] / "build" / "web"
 if not (directory / "engine.wasm").is_file():
-    parser.error("Run build-web.ps1 before starting the preview")
+    parser.error("Run web.py build or build-web.ps1 before starting the preview")
 
 class Handler(SimpleHTTPRequestHandler):
     extensions_map = {**SimpleHTTPRequestHandler.extensions_map, ".wasm": "application/wasm"}
