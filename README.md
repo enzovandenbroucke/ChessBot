@@ -29,6 +29,8 @@ necessarily improve my engine, so I kept earlier versions for comparison.
   rook activity and king safety terms.
 - Dynamic time management and optional Polyglot opening books.
 
+More details on the engine's [architecture](docs/ARCHITECTURE.md) and each file's purpose can be found here.
+
 The browser interface supports play, analysis, clocks, undo/redo and FEN loading.
 The C engine runs locally in the browser; there is no server-side engine.
 
