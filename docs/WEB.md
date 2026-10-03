@@ -5,12 +5,23 @@ Python serves files for the local preview; the engine runs in the browser.
 
 ## Setup and launch
 
-On Windows, with Git and Python installed, run from the repository root:
+Install Git and Python **3.10 or newer**, then run from the repository root.
+
+**Windows (PowerShell)**
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\setup-web.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File .\web.ps1
 ```
+
+**macOS / Linux (Terminal)**
+
+```bash
+python3 web.py setup
+python3 web.py
+```
+
+The Python launcher also works on Windows with `python` instead of `python3`.
 
 Setup installs Emscripten **6.0.10** under `build/emsdk/` and only needs to run once.
 It requires internet access and doesn't permanently change PATH. The
@@ -18,8 +29,9 @@ It requires internet access and doesn't permanently change PATH. The
 describes the toolchain.
 
 Open <http://127.0.0.1:8080/>. Leave the terminal running; Ctrl+C stops the preview.
-Use `-Port 8081` if the default port is occupied. `web.ps1 -SkipBuild` serves an
-existing build.
+If the default port is occupied, use `web.ps1 -Port 8081` on Windows or
+`python3 web.py --port 8081` on macOS/Linux. To serve an existing build, use
+`web.ps1 -SkipBuild` or `python3 web.py --skip-build`.
 
 ## Controls
 
@@ -48,13 +60,24 @@ differ from the search evaluation.
 
 ## Build and deployment
 
+On Windows:
+
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\build-web.ps1
 ```
 
-Release uses `-O3`; `-Configuration Debug` enables `-O0 -g` and Emscripten assertions.
-Pass `-Compiler 'C:\path\to\emcc.exe'` for an existing SDK, or
-`web.ps1 -Python 'C:\path\to\python.exe'` to select the preview server's Python.
+On macOS/Linux:
+
+```bash
+python3 web.py build
+```
+
+Release uses `-O3`. Debug enables `-O0 -g` and Emscripten assertions:
+`-Configuration Debug` in PowerShell, or `--configuration Debug` with Python.
+For an existing SDK, pass `-Compiler 'C:\path\to\emcc.exe'` or
+`--compiler /path/to/emcc`. The Python launcher uses the interpreter that started
+it; `web.ps1 -Python 'C:\path\to\python.exe'` selects the Windows preview server's
+Python.
 
 The output in `build/web/` contains the site, `engine.js`, `engine.wasm` and local
 SVG artwork. It can be served by a static HTTP/HTTPS host. Opening `index.html`
