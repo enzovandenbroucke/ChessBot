@@ -1,0 +1,74 @@
+[
+    {
+        "file":  "white-pawn.svg",
+        "source":  "https://commons.wikimedia.org/wiki/File:Chess_plt45.svg",
+        "download":  "https://commons.wikimedia.org/wiki/Special:Redirect/file/Chess_plt45.svg",
+        "sha256":  "60905667b9c7976078ab32d46848ee96670b15871595474e207db78cc488a6c9"
+    },
+    {
+        "file":  "white-knight.svg",
+        "source":  "https://commons.wikimedia.org/wiki/File:Chess_nlt45.svg",
+        "download":  "https://commons.wikimedia.org/wiki/Special:Redirect/file/Chess_nlt45.svg",
+        "sha256":  "8fbbdb8b547529890fc4e3417a51dd2a539570f823cae6fcd7f77309187317a7"
+    },
+    {
+        "file":  "white-bishop.svg",
+        "source":  "https://commons.wikimedia.org/wiki/File:Chess_blt45.svg",
+        "download":  "https://commons.wikimedia.org/wiki/Special:Redirect/file/Chess_blt45.svg",
+        "sha256":  "2ca6cedaae1cb349ebfa01ba8e9a6cbeba6fb9691c1afa83e87a0bfbcaf7c7f6"
+    },
+    {
+        "file":  "white-rook.svg",
+        "source":  "https://commons.wikimedia.org/wiki/File:Chess_rlt45.svg",
+        "download":  "https://commons.wikimedia.org/wiki/Special:Redirect/file/Chess_rlt45.svg",
+        "sha256":  "7d249278b339be023c0620e9619873e727c607199784c33927b2ef9c32b5223a"
+    },
+    {
+        "file":  "white-queen.svg",
+        "source":  "https://commons.wikimedia.org/wiki/File:Chess_qlt45.svg",
+        "download":  "https://commons.wikimedia.org/wiki/Special:Redirect/file/Chess_qlt45.svg",
+        "sha256":  "6ab05d3916ab9794098b7fd2f6b3cc95cf21cfa6f8c592785b1bd28956fe0f6a"
+    },
+    {
+        "file":  "white-king.svg",
+        "source":  "https://commons.wikimedia.org/wiki/File:Chess_klt45.svg",
+        "download":  "https://commons.wikimedia.org/wiki/Special:Redirect/file/Chess_klt45.svg",
+        "sha256":  "68a791305bbfadf77ab00e675c92fd2196328c20bcc71f3ac342593446a3f872"
+    },
+    {
+        "file":  "black-pawn.svg",
+        "source":  "https://commons.wikimedia.org/wiki/File:Chess_pdt45.svg",
+        "download":  "https://commons.wikimedia.org/wiki/Special:Redirect/file/Chess_pdt45.svg",
+        "sha256":  "e42939cbda176f27c49aadb2b8c16cd4c32b9fd6ef7ec37794ea1574c90c5c43"
+    },
+    {
+        "file":  "black-knight.svg",
+        "source":  "https://commons.wikimedia.org/wiki/File:Chess_ndt45.svg",
+        "download":  "https://commons.wikimedia.org/wiki/Special:Redirect/file/Chess_ndt45.svg",
+        "sha256":  "1e9146b9b2a827daeb05adc01c6adfc5435a33b14c022ce6082e36c549fc99ab"
+    },
+    {
+        "file":  "black-bishop.svg",
+        "source":  "https://commons.wikimedia.org/wiki/File:Chess_bdt45.svg",
+        "download":  "https://upload.wikimedia.org/wikipedia/commons/9/98/Chess_bdt45.svg?utm_source=commons.wikimedia.org\u0026utm_campaign=index\u0026utm_content=original",
+        "sha256":  "415713361b06c446a732d5903ca3dc248e5b9dd4779ce23d20868283faca7874"
+    },
+    {
+        "file":  "black-rook.svg",
+        "source":  "https://commons.wikimedia.org/wiki/File:Chess_rdt45.svg",
+        "download":  "https://upload.wikimedia.org/wikipedia/commons/f/ff/Chess_rdt45.svg?utm_source=commons.wikimedia.org\u0026utm_campaign=index\u0026utm_content=original",
+        "sha256":  "d21f8b94bd52dd83a612eaf09f0fe1b327c75679c7a48e48c8cf8fa78c39d4ae"
+    },
+    {
+        "file":  "black-queen.svg",
+        "source":  "https://commons.wikimedia.org/wiki/File:Chess_qdt45.svg",
+        "download":  "https://upload.wikimedia.org/wikipedia/commons/4/47/Chess_qdt45.svg?utm_source=commons.wikimedia.org\u0026utm_campaign=index\u0026utm_content=original",
+        "sha256":  "8ec34e0c3ab3d0ab16cc3b6e53b740cd92fc876089d77c4418b3b92666f735cf"
+    },
+    {
+        "file":  "black-king.svg",
+        "source":  "https://commons.wikimedia.org/wiki/File:Chess_kdt45.svg",
+        "download":  "https://upload.wikimedia.org/wikipedia/commons/f/f0/Chess_kdt45.svg?utm_source=commons.wikimedia.org\u0026utm_campaign=index\u0026utm_content=original",
+        "sha256":  "de83432bec87bfe6b0717c49debe3e5479e557b9ebbc23dc4111d83f823da424"
+    }
+]

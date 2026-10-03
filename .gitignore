@@ -1,0 +1,12 @@
+/build/
+__pycache__/
+*.pyc
+*.exe
+*.o
+*.a
+*.dll
+*.nnue
+/bots/v18at.h
+/test.c
+/Compare.c
+/resources/*.bin

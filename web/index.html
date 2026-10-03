@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Jouez contre ChessBot, un moteur d’échecs personnel écrit en C, directement dans votre navigateur.">
+  <title>ChessBot — jouer et analyser</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="page-header">
+    <div><h1>ChessBot<span>v17a</span></h1><p class="author">Enzo Vandenbroucke</p></div>
+    <div class="header-actions">
+      <div class="languages" role="group" aria-label="Language / Langue">
+        <button class="language-button" data-language="fr" aria-label="Français" aria-pressed="true" title="Français"><svg viewBox="0 0 30 20" aria-hidden="true"><path fill="#002395" d="M0 0h10v20H0z"/><path fill="#fff" d="M10 0h10v20H10z"/><path fill="#ed2939" d="M20 0h10v20H20z"/></svg></button>
+        <button class="language-button" data-language="en" aria-label="English" aria-pressed="false" title="English"><svg viewBox="0 0 30 20" aria-hidden="true"><path fill="#fff" d="M0 0h30v20H0z"/><path stroke="#b22234" stroke-width="1.54" d="M0 .77h30M0 3.85h30M0 6.92h30M0 10h30M0 13.08h30M0 16.15h30M0 19.23h30"/><path fill="#3c3b6e" d="M0 0h12v10.77H0z"/><defs><pattern id="us-stars" width="2" height="2.154" patternUnits="userSpaceOnUse"><path fill="#fff" d="m1 .35.15.45h.47l-.38.28.15.45L1 1.25l-.39.28.15-.45L.38.8h.47z"/></pattern></defs><path fill="url(#us-stars)" d="M0 0h12v10.77H0z"/></svg></button>
+      </div>
+      <span class="engine-badge" id="engine-badge">Chargement du moteur…</span>
+    </div>
+  </header>
+  <main class="workspace">
+    <section class="board-column" aria-label="Échiquier et pendules" data-i18n-label="boardClocks">
+      <div class="player-card" id="top-player"><span class="player-name"></span><span class="clock" id="top-clock">00:05.0</span></div>
+      <div class="board-frame">
+        <div class="evaluation" aria-label="Évaluation en faveur des Blancs" data-i18n-label="evaluation"><div id="eval-white"></div><span id="bar-score">—</span></div>
+        <div class="board" id="board" role="group" aria-label="Échiquier" data-i18n-label="board"></div>
+      </div>
+      <div class="player-card" id="bottom-player"><span class="player-name"></span><span class="clock" id="bottom-clock">05:00</span></div>
+      <div class="board-footer"><span id="turn-status" role="status" aria-live="polite">Préparation de la partie…</span><button id="flip" class="quiet" aria-label="Retourner l’échiquier" data-i18n="flip" data-i18n-label="flipLabel">Retourner ↕</button></div>
+    </section>
+    <aside class="sidebar">
+      <div class="tabs" role="group" aria-label="Mode" data-i18n-label="mode"><button id="mode-play" class="selected" data-i18n="play">Jouer</button><button id="mode-analysis" data-i18n="analyze">Analyser</button></div>
+      <section class="panel">
+        <p class="eyebrow" data-i18n="nextGame">Votre prochaine partie</p>
+        <fieldset class="color-choice"><legend data-i18n="color">Votre couleur</legend><div class="color-options">
+          <label><input type="radio" name="human-color" value="white" checked><span class="color-swatch white"></span><span data-i18n="white">Blancs</span></label>
+          <label><input type="radio" name="human-color" value="black"><span class="color-swatch black"></span><span data-i18n="black">Noirs</span></label>
+        </div></fieldset>
+        <p class="preset-label" data-i18n="standardTimes">Cadences standards</p>
+        <div class="time-presets" role="group" aria-label="Cadences standards" data-i18n-label="standardTimes">
+          <button type="button" data-preset="3,3,50" aria-pressed="false"><span>3 min</span><small>3 s + 50 ms</small></button>
+          <button type="button" data-preset="5,5,100" aria-pressed="true"><span>5 min</span><small>5 s + 100 ms</small></button>
+          <button type="button" data-preset="10,10,200" aria-pressed="false"><span>10 min</span><small>10 s + 200 ms</small></button>
+        </div>
+        <p class="hint" data-i18n="presetHint">Vous : minutes · moteur : secondes + incrément.</p>
+        <div class="time-settings">
+          <div><label for="human-time" data-i18n="humanTime">Votre temps (minutes)</label><input id="human-time" type="number" min="0.1" max="60" step="0.1" value="5"></div>
+          <div><label for="bot-time" data-i18n="botTime">Moteur (secondes)</label><input id="bot-time" type="number" min="1" max="300" step="1" value="5"></div>
+        </div>
+        <label for="bot-increment" data-i18n="increment">Incrément du moteur (ms / coup)</label>
+        <input id="bot-increment" type="number" min="0" max="5000" step="50" value="100">
+        <button id="new-game" class="primary" data-i18n="newGame" disabled>Nouvelle partie</button>
+        <button id="resign" class="resign" data-i18n="resign" disabled>Abandonner</button>
+        <p class="hint" data-i18n="settingsHint">Les réglages s’appliquent à la prochaine partie. Votre pendule n’a pas d’incrément.</p>
+      </section>
+      <section class="panel analysis-panel">
+        <div class="analysis-heading"><p class="eyebrow" data-i18n="positionEvaluation">Évaluation de la position</p><strong id="eval-score">—</strong></div>
+        <p id="eval-description" class="muted">Le moteur prépare son analyse.</p>
+        <p id="static-score" class="hint"></p>
+        <div class="history-actions"><button id="undo" data-i18n="undo" aria-keyshortcuts="ArrowLeft" disabled>← Annuler</button><button id="redo" data-i18n="redo" aria-keyshortcuts="ArrowRight" disabled>Rétablir →</button></div>
+        <p class="hint" data-i18n="historyHint">Annuler ou rétablir passe en mode analyse et met les pendules en pause.</p>
+        <details><summary data-i18n="searchDetails">Détails de recherche</summary><p id="search-stats" class="hint">Aucune recherche terminée.</p><p id="pv" class="pv"></p></details>
+      </section>
+      <section class="panel fen-panel">
+        <label for="fen" data-i18n="fen">Position FEN</label>
+        <textarea id="fen" rows="3" spellcheck="false" aria-label="Position FEN" data-i18n-label="fen"></textarea>
+        <div class="fen-actions"><button id="load-fen" data-i18n="load" disabled>Charger</button><button id="copy-fen" data-i18n="copy" disabled>Copier</button></div>
+        <p class="hint" data-i18n="fenHint">Charger une position ouvre le mode analyse.</p>
+      </section>
+      <p id="notice" class="notice" role="status" aria-live="polite"></p>
+    </aside>
+  </main>
+  <footer class="page-footer"><span data-i18n="footer">Moteur C exécuté dans votre navigateur · aucune partie envoyée à un serveur.</span><br><a href="pieces/NOTICE.md" data-i18n="credits">Crédits des pièces</a></footer>
+  <dialog id="promotion-dialog"><h2 data-i18n="promotion">Choisir la promotion</h2><div id="promotion-options"></div><button id="cancel-promotion" class="quiet" data-i18n="cancel">Annuler</button></dialog>
+  <img id="drag-piece" class="drag-piece" alt="" hidden>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
