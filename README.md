@@ -45,8 +45,6 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\web.ps1
 Open <http://127.0.0.1:8080/>. See the [browser guide](docs/WEB.md) for controls
 and build options.
 
-![ChessBot browser interface](docs/images/web-interface.jpg)
-
 ## Build and test
 
 For the native programs, I use Windows x64 with MinGW-w64 GCC and PowerShell.
