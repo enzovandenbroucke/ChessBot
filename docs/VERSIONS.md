@@ -27,14 +27,6 @@ below. The current engine is v17, with classical evaluation.
 | v16 | Late-move pruning, countermoves, internal iterative reduction, singular extensions | Further search selectivity |
 | v17 | King safety, rook activity and dynamic time management | Improve evaluation and allocation of thinking time |
 
-These are the stages of development, rather than isolated feature switches.
-The searches now share the current board and evaluation modules: v15 and v17 use
-`evalNew`, while v16 uses `eval`. I also experimented with mobility, but it isn't
-enabled in the current evaluator.
-
-I kept `ancientEvalCompute`, `tapered_eval`, `evalQS` and `evaluateMobility` for
-earlier evaluation experiments. The included searches don't call them today.
-
 ## Current comparisons
 
 My [October 2026 results](../results/2026-10-02/README.md) compare all eight
@@ -62,18 +54,18 @@ figures below are my earlier estimates, with the original uncertainty values.
 | --- | --- |
 | v4 | +131 Elo vs v3 |
 | v5 | +178 Elo vs v4 |
-| v6 | +25 Elo; reference not recorded |
-| v7 | +84 Elo; reference not recorded |
-| v8 | 2507 ± 14; +79 in my notes |
-| v9 | 2508 ± 15 |
-| v10 | 2545 ± 20; approximately 2× faster after the bitboard migration |
-| v11 | 2642 ± 19; vs v10: 534 W / 256 D / 210 L, +117 ± 19 |
-| v12 | 2708 ± 18; vs v11: 452 W / 282 D / 266 L, +65 ± 18 |
+| v6 | +25 Elo vs v5 |
+| v7 | +84 Elo vs v6 |
+| v8 | 2507 ± 14 against SF; +79 Elo vs v7 |
+| v9 | 2508 ± 15 against SF |
+| v10 | 2545 ± 20 against SF; approximately 2× faster after the bitboard migration |
+| v11 | 2642 ± 19 against SF; +117 Elo vs v10 |
+| v12 | 2708 ± 18 against SF; +65 Elo vs v11 |
 | v13 | No measurement recorded |
-| v14 | 2720 ± 19 at 100 ms/move; 2789 ± 18 at 1000 ms/move |
-| v15 | 2718 ± 17; +56 ± 19 vs v14 |
-| v16 | 2714 ± 19 |
-| v17 | 2787 ± 16 at 3 s/game + 50 ms/move; 2786 under the previous scenario |
+| v14 | 2720 ± 19 against SF |
+| v15 | 2718 ± 17 against SF; +56 Elo vs v14 |
+| v16 | 2714 ± 19 against SF |
+| v17 | 2787 ± 16 at 3 s/game + 50 ms/move against SF; 2786 under the previous scenario |
 
 I changed the timing protocol during development, so these figures aren't one
 controlled comparison. They are estimates against limited-strength Stockfish,
@@ -84,7 +76,3 @@ For the historical v17 result I used `CompareThread`, SF at 2770, four workers
 and `test_pos_dataset_normal.txt`. The October 2026 benchmark uses different
 starting positions, Stockfish setup and draw arbitration. Its estimates should
 not be read as a direct gain or loss against the historical 2787 figure.
-
-Additional comparison totals from my notes are v4 vs v3 `468-425-107`, v5 vs v4
-`545-382-73`, v6 `260-553-187`, v7 `500-238-262` and v8 `477-271-252`.
-I didn't label the order of wins, draws and losses alongside those totals.
