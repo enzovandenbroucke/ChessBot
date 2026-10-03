@@ -34,12 +34,21 @@ The C engine runs locally in the browser; there is no server-side engine.
 
 ## Try it yourself
 
-On Windows, install Git and Python, then run these commands from the repository
+Install Git and Python 3.10 or newer, then run these commands from the repository
 root. Setup installs the Emscripten toolchain locally; it only needs to run once.
+
+**Windows (PowerShell)**
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File .\setup-web.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File .\web.ps1
+```
+
+**macOS / Linux (Terminal)**
+
+```bash
+python3 web.py setup
+python3 web.py
 ```
 
 Open <http://127.0.0.1:8080/>. See the [browser guide](docs/WEB.md) for controls
