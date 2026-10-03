@@ -1,8 +1,8 @@
 #include "../ui/Game.h"
-#include "../bots/v17at.h"
+#include "../bots/v17t.h"
 #include <emscripten/emscripten.h>
 
-__thread TTEntry* tt17a = NULL;
+__thread TTEntry* tt17 = NULL;
 static Game game;
 static char output[24576];
 
@@ -14,7 +14,7 @@ EMSCRIPTEN_KEEPALIVE int cb_init(void) {
 EMSCRIPTEN_KEEPALIVE int cb_load(const char* fen) {
     if (!game.position && !cb_init()) return 0;
     if (!loadGame(&game, fen)) return 0;
-    if (tt17a) clearTableSize(tt17a, TT_SIZE_THREADED);
+    if (tt17) clearTableSize(tt17, TT_SIZE_THREADED);
     return 1;
 }
 
@@ -51,23 +51,23 @@ EMSCRIPTEN_KEEPALIVE const char* cb_state(void) {
 EMSCRIPTEN_KEEPALIVE const char* cb_search(int timeLeftMs, int incrementMs) {
     if (!game.position || !game.legalCount || game.position->halfMove >= 100 ||
         isRepetition(game.position) || timeLeftMs <= 0) return "{\"move\":null}";
-    if (!tt17a) tt17a = calloc(TT_SIZE_THREADED, sizeof(TTEntry));
+    if (!tt17) tt17 = calloc(TT_SIZE_THREADED, sizeof(TTEntry));
     Position* snapshot = malloc(sizeof(Position));
-    if (!tt17a || !snapshot) { free(snapshot); return "{\"error\":\"Search allocation failed\"}"; }
+    if (!tt17 || !snapshot) { free(snapshot); return "{\"error\":\"Search allocation failed\"}"; }
     memcpy(snapshot, game.position, sizeof(Position));
     bool white = snapshot->whiteToMove;
-    inBook17a = false; /* The standalone browser build has no opening book. */
+    inBook17 = false; /* The standalone browser build has no opening book. */
     uint64_t start = get_real_time_ms();
-    uint64_t best = getBestMoveDynamic17a(snapshot, (uint64_t)timeLeftMs,
+    uint64_t best = getBestMoveDynamic17(snapshot, (uint64_t)timeLeftMs,
                                         (uint64_t)(incrementMs > 0 ? incrementMs : 0));
     int used = snprintf(output, sizeof(output),
         "{\"move\":{\"from\":%d,\"to\":%d,\"promotion\":%d},"
         "\"score\":%d,\"depth\":%d,\"nodes\":%d,\"elapsed\":%llu,\"pv\":[",
         prev(best), next(best), !best || isVacant(promotion(best)) ? 0 : uncolor(promotion(best)),
-        white ? webSearchScore17a : -webSearchScore17a, webSearchDepth17a,
+        white ? webSearchScore17 : -webSearchScore17, webSearchDepth17,
         snapshot->nodeCount, (unsigned long long)(get_real_time_ms() - start));
-    for (int i = 0; i < thread_pvLength17a[0] && i < MAX_DEPTH && webSearchDepth17a > 0; i++) {
-        uint64_t m = thread_pvTable17a[i];
+    for (int i = 0; i < thread_pvLength17[0] && i < MAX_DEPTH && webSearchDepth17 > 0; i++) {
+        uint64_t m = thread_pvTable17[i];
         char from[3], to[3], suffix[2] = {0};
         squareToString(from, prev(m)); squareToString(to, next(m));
         if (!isVacant(promotion(m))) suffix[0] = "  nbrqk"[uncolor(promotion(m))];

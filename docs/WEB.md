@@ -1,6 +1,6 @@
 # Browser interface
 
-The interface runs v17a locally as WebAssembly, with plain HTML, CSS and JavaScript.
+The interface runs v17 locally as WebAssembly, with plain HTML, CSS and JavaScript.
 Python serves files for the local preview; the engine runs in the browser.
 
 ## Setup and launch

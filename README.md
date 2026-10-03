@@ -1,7 +1,7 @@
 # ChessBot
 
 A chess engine I built in C to learn about game-tree search, data representation
-and performance. The current version, **v17a**, can be played in the browser through
+and performance. The current version, **v17**, can be played in the browser through
 WebAssembly.
 
 ## Why I built it
@@ -62,15 +62,30 @@ are documented separately.
 
 ## Results and development
 
-In earlier tests, I estimated v17 at **2787 ± 16 Elo** against limited-strength
-Stockfish, using 3 seconds + 50 ms per move. This is a calibration estimate,
-not a tournament rating. The [version history](docs/VERSIONS.md) records the
-changes and measurements from development.
+I benchmarked v10–v17 under a common protocol on October 2–3, 2026. Matches use
+**3 seconds + 50 ms per move**, reversed colors and **no opening book**.
+Against Stockfish 18 set to 2700, **v17 scored 48.7%**, giving an estimated
+**2691 Elo** (95% interval: 2668–2715). It scored **63.3% against v16**, a
+relative gain of **+95 Elo** (68–122).
 
-I now use a common [benchmark protocol](docs/METRICS.md) to compare v10–v17a:
-paired matches against Stockfish and the previous version, plus nodes/s and
-completed depth at a fixed time budget. Each run saves a results table and the
-underlying measurements and games.
+| Version | SF score | Estimated Elo | ΔElo vs previous | Nodes/s (millions) | Mean depth |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| v10 | 26.8% | 2525 | — | 3.41 | 12.88 |
+| v11 | 33.9% | 2584 | +161 | 4.07 | 14.04 |
+| v12 | 37.9% | 2614 | +8 | 4.41 | 14.62 |
+| v13 | 33.4% | 2580 | +10 | 4.09 | 15.75 |
+| v14 | 32.2% | 2571 | +61 | 3.29 | 16.08 |
+| v15 | 39.2% | 2624 | +58 | 3.00 | 17.96 |
+| v16 | 40.8% | 2635 | +50 | 2.94 | 20.29 |
+| v17 | 48.7% | 2691 | +95 | 2.75 | 19.75 |
+
+SF scores use the same 2700 setting. Performance uses 24 searches per version
+at 1000 ms each. These Elo estimates describe the test protocol, not tournament
+ratings; small gains such as v12 and v13 remain uncertain. The
+[full results](results/2026-10-02/README.md) include W/D/L, confidence intervals,
+adjusted-SF estimates, median depth, depth/s and the underlying data. The
+[benchmark guide](docs/METRICS.md) explains the protocol, and the
+[version history](docs/VERSIONS.md) keeps my earlier measurements separately.
 
 I'd like to explore NNUE evaluation next and add a standalone UCI interface.
 The NNUE experiment is not included here.

@@ -85,7 +85,7 @@ function renderClocks() {
   for (const [position, side] of [['top', topSide], ['bottom', bottomSide]]) {
     const card = $(`${position}-player`);
     const human = (side === 0) === humanWhite;
-    card.querySelector('.player-name').textContent = `${sideName(side)} · ${mode === 'analysis' ? t('analysis') : human ? t('you') : 'ChessBot v17a'}`;
+    card.querySelector('.player-name').textContent = `${sideName(side)} · ${mode === 'analysis' ? t('analysis') : human ? t('you') : 'ChessBot v17'}`;
     $(`${position}-clock`).textContent = clockText(values[side]);
     card.classList.toggle('active', clock.active === side && mode === 'play' && !terminal());
     card.classList.toggle('flagged', flag === side);

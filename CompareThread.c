@@ -6,7 +6,7 @@
 #include <stdbool.h>
 
 #include "bots/v15t.h"
-#include "bots/v17at.h"
+#include "bots/v17t.h"
 #include "bots/stockfish.h"
 
 // Shared tournament state.
@@ -44,7 +44,7 @@ typedef struct {
     pthread_mutex_t sfLock;
 } CalibrationContext;
 
-__thread TTEntry* tt17a = NULL;
+__thread TTEntry* tt17 = NULL;
 __thread TTEntry* tt15 = NULL;
 
 int botAgainstBot(Position* pos, Bot w, Bot b, uint64_t baseTimeMs, uint64_t incMs) {
@@ -277,7 +277,7 @@ void fight(Bot w,Bot b,uint64_t baseTimeMs,uint64_t incMs){
         clearTableSize(w.table, TT_SIZE_THREADED);
         clearTableSize(b.table, TT_SIZE_THREADED);
         inBook15 = true;
-        inBook17a = true;
+        inBook17 = true;
 
         int result = botAgainstBot(pos,w,b,baseTimeMs,incMs);
         if(result == 1) {
@@ -297,7 +297,7 @@ void fight(Bot w,Bot b,uint64_t baseTimeMs,uint64_t incMs){
 
         printf("\nReturn game %d, FEN: %s", i+1,fen);
         initBoard(pos,fen);
-        inBook17a = true;
+        inBook17 = true;
         inBook15 = true;
         clearTableSize(w.table, TT_SIZE_THREADED);
         clearTableSize(b.table, TT_SIZE_THREADED);
@@ -367,8 +367,8 @@ void freeFens(char** fens, int numFens) {
 void* tournamentWorker(void* arg) {
     TournamentContext* ctx = (TournamentContext*)arg;
 
-    tt17a = calloc(TT_SIZE_THREADED, sizeof(TTEntry));
-    if (!tt17a) return NULL;
+    tt17 = calloc(TT_SIZE_THREADED, sizeof(TTEntry));
+    if (!tt17) return NULL;
     tt15 = calloc(TT_SIZE_THREADED, sizeof(TTEntry));
     if (!tt15) return NULL;
 
@@ -396,9 +396,9 @@ void* tournamentWorker(void* arg) {
         Bot* blackBot = botAIsWhite ? ctx->botB : ctx->botA;
 
         initBoard(pos, startingFen);
-        clearTableSize(tt17a,TT_SIZE_THREADED);
+        clearTableSize(tt17,TT_SIZE_THREADED);
         clearTableSize(tt15,TT_SIZE_THREADED);
-        inBook17a = true;
+        inBook17 = true;
         inBook15 = true;
         int result = 0;
 
@@ -482,9 +482,9 @@ void* tournamentWorker(void* arg) {
     }
 
     if (pos != NULL) free(pos);
-    free(tt17a);
+    free(tt17);
     free(tt15);
-    tt17a = NULL;
+    tt17 = NULL;
     tt15 = NULL;
     return NULL;
 }
@@ -566,8 +566,8 @@ void runTournamentMultiThread(Bot* botA, Bot* botB, int numGames, int numThreads
 void* calibrationWorker(void* arg) {
     CalibrationContext* ctx = (CalibrationContext*)arg;
 
-    tt17a = calloc(TT_SIZE_THREADED, sizeof(TTEntry));
-    if (!tt17a) {
+    tt17 = calloc(TT_SIZE_THREADED, sizeof(TTEntry));
+    if (!tt17) {
         fprintf(stderr, "Failed to allocate tt15\n");
         return NULL;
     }
@@ -593,8 +593,8 @@ void* calibrationWorker(void* arg) {
         bool botIsWhite = (gameIndex % 2 == 0);
 
         initBoard(pos, startingFen);
-        clearTableSize(tt17a, TT_SIZE_THREADED);
-        inBook17a = true;
+        clearTableSize(tt17, TT_SIZE_THREADED);
+        inBook17 = true;
 
         uint64_t wTime = ctx->baseTimeMs;
         uint64_t bTime = ctx->baseTimeMs;
@@ -701,8 +701,8 @@ void* calibrationWorker(void* arg) {
         pthread_mutex_unlock(&ctx->lock);
     }
     if (pos != NULL) freePosition(pos);
-    free(tt17a);
-    tt17a = NULL;
+    free(tt17);
+    tt17 = NULL;
 
     closeStockfishThread();
     return NULL;
@@ -797,13 +797,13 @@ int main(){
     initOpeningBook(openingBookPath());
     precomputed = true;
 
-    v17at.name = "Version 17a";
-    v17at.play = getBestMoveDynamic17a;
-    v17at.table = calloc(TT_SIZE_THREADED, sizeof(TTEntry));
+    v17t.name = "Version 17";
+    v17t.play = getBestMoveDynamic17;
+    v17t.table = calloc(TT_SIZE_THREADED, sizeof(TTEntry));
 
-    calibrateRegularBlitz(v17at,2770);
+    calibrateRegularBlitz(v17t,2770);
 
-    free(v17at.table);
+    free(v17t.table);
 
     freeGlobalData();
 

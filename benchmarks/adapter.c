@@ -24,11 +24,11 @@ static uint64_t benchmarkFixedMs;
 #include "../bots/v15t.h"
 #define SUFFIX 15
 #elif BENCH_VERSION == 16
-#include "../bots/v16dt.h"
-#define SUFFIX 16d
+#include "../bots/v16t.h"
+#define SUFFIX 16
 #elif BENCH_VERSION == 17
-#include "../bots/v17at.h"
-#define SUFFIX 17a
+#include "../bots/v17t.h"
+#define SUFFIX 17
 #else
 #error Unsupported benchmark version
 #endif
@@ -127,7 +127,7 @@ int main(void) {
             if (benchmarkFixedMs) JOIN(inBook,SUFFIX) = false;
             double start = wallMs();
 #if BENCH_VERSION == 17
-            uint64_t m = getBestMoveDynamic17a(pos, budget, increment);
+            uint64_t m = getBestMoveDynamic17(pos, budget, increment);
 #else
             uint64_t limit = benchmarkFixedMs ? budget : budget / 25 + increment / 2;
             if (!benchmarkFixedMs && limit > budget * 3 / 4) limit = budget * 3 / 4;

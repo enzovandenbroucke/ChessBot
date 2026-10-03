@@ -1,4 +1,4 @@
-"""Serial native performance and paired strength measurements for v10-v17a."""
+"""Serial native performance and paired strength measurements for v10-v17."""
 import argparse
 from collections import Counter
 import contextlib
@@ -316,7 +316,7 @@ def main():
     parser.add_argument('--stockfish-only', action='store_true', help='Skip comparisons against predecessor versions')
     parser.add_argument('--priority-versions', nargs='+', type=int, default=[],
                         help='Publish fixed-SF results for these versions before their adjusted-SF matches')
-    parser.add_argument('--book', type=Path, help='External Polyglot book for clock matches; performance stays book-free')
+    parser.add_argument('--book', type=Path, help='External Polyglot book for clock matches (disabled by default); performance stays book-free')
     parser.add_argument('--pilot-pairs', type=int, default=10)
     parser.add_argument('--pilot-rounds', type=int, default=3)
     parser.add_argument('--seed', type=int, default=20261002)

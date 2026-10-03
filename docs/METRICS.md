@@ -1,9 +1,21 @@
 # Version benchmarks
 
-I compare v10–v17a using paired games and fixed-budget searches. All versions
+I compare v10–v17 using paired games and fixed-budget searches. All versions
 share the current board and evaluation modules, so these measurements compare
 the included implementations rather than reconstructing their original ratings.
 v10 has no measured predecessor here because v9 isn't included.
+
+## Published results
+
+I use my first complete run, measured on **October 2–3, 2026**, as the published
+comparison: [tables and data](../results/2026-10-02/README.md). It covers all eight
+versions, fixed and adjusted Stockfish, predecessor matches and performance.
+Matches used **3 s + 50 ms, without an opening book**.
+
+v17's fixed-SF estimate is **2691 Elo** (95% interval: 2668–2715), and its gain
+against v16 is **+95 Elo** (68–122). The data include CSV/JSON summaries,
+fixed-budget samples, compressed games and configuration/file hashes. Local
+paths in the published metadata are normalized; the measured values are preserved.
 
 ## Run the benchmarks
 
@@ -20,6 +32,10 @@ The launcher builds one native executable per version with `-O3`, without
 compiler's runtime DLLs on PATH.
 
 For matches, put `stockfish.exe` in the repository root or pass `-Stockfish`:
+
+**Matches run without an opening book by default**, including when
+`CHESSBOT_BOOK` is set for other native programs. Pass `-Book` explicitly to
+enable one. The first two examples below reproduce this book-free setup.
 
 ```powershell
 # Performance and 500 games per comparison, with adjusted Stockfish as well.

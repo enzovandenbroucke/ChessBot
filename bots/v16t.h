@@ -1,55 +1,55 @@
 #include "../Bot.h"
 #include <assert.h>
 
-#define NULL_MOVE_CONST16d 3
-#define HISTORY_MAX16d 16384
-#define HIST_BONUS_MAX16d 96
-#define ASPIRATION_WINDOW16d 50
-#define GOOD_CAPTURE_BONUS16d (128ULL << 41)
-#define COUNTERMOVE_BONUS16d ((uint64_t) 98 << 41) // just under Killer 2 (100)
+#define NULL_MOVE_CONST16 3
+#define HISTORY_MAX16 16384
+#define HIST_BONUS_MAX16 96
+#define ASPIRATION_WINDOW16 50
+#define GOOD_CAPTURE_BONUS16 (128ULL << 41)
+#define COUNTERMOVE_BONUS16 ((uint64_t) 98 << 41) // just under Killer 2 (100)
 
-__thread int cpt16d = 0;
-__thread uint64_t thread_pvTable16d[MAX_DEPTH*(MAX_DEPTH+1)];
-__thread int thread_pvLength16d[MAX_DEPTH+1];
-__thread uint16_t thread_killers16d[MAX_DEPTH*2];
-__thread bool inBook16d = true;
-__thread int historyTable16d[2][64][64]; // [color][from][to]
-__thread uint16_t thread_counterMoves16d[64][64]; // [opponentFrom][opponentTo]
-extern __thread TTEntry* tt16d;
-Bot v16dt;
+__thread int cpt16 = 0;
+__thread uint64_t thread_pvTable16[MAX_DEPTH*(MAX_DEPTH+1)];
+__thread int thread_pvLength16[MAX_DEPTH+1];
+__thread uint16_t thread_killers16[MAX_DEPTH*2];
+__thread bool inBook16 = true;
+__thread int historyTable16[2][64][64]; // [color][from][to]
+__thread uint16_t thread_counterMoves16[64][64]; // [opponentFrom][opponentTo]
+extern __thread TTEntry* tt16;
+Bot v16t;
 
-static inline void updateHistoryKillersAndCounter16d(Position* pos, uint64_t bestMove,
+static inline void updateHistoryKillersAndCounter16(Position* pos, uint64_t bestMove,
     int depth,uint64_t* quietsSearched, int numQuiets,uint64_t prevMove) {
     int bonus = depth * depth;
     if (bonus > 400) bonus = 400;
 
     // Reward the quiet cutoff move.
     int c = pos->whiteToMove ? WHITE_INDEX : BLACK_INDEX;
-    int cur = historyTable16d[c][prev(bestMove)][next(bestMove)];
-    historyTable16d[c][prev(bestMove)][next(bestMove)] += bonus - (cur * bonus) / HISTORY_MAX16d;
+    int cur = historyTable16[c][prev(bestMove)][next(bestMove)];
+    historyTable16[c][prev(bestMove)][next(bestMove)] += bonus - (cur * bonus) / HISTORY_MAX16;
 
     // Penalize earlier quiet moves that failed to cause a cutoff.
     for (int i = 0; i < numQuiets; i++) {
         uint64_t qm = quietsSearched[i];
         int qc = colorIndex(pos->board[prev(qm)]);
-        int qcur = historyTable16d[qc][prev(qm)][next(qm)];
-        historyTable16d[qc][prev(qm)][next(qm)] -= bonus + (qcur * bonus) / HISTORY_MAX16d;
+        int qcur = historyTable16[qc][prev(qm)][next(qm)];
+        historyTable16[qc][prev(qm)][next(qm)] -= bonus + (qcur * bonus) / HISTORY_MAX16;
     }
 
     uint16_t mv = toSmallMove(bestMove);
     int ply = pos->currentDepth;
-    if (thread_killers16d[2 * ply] != mv) {
-        thread_killers16d[2 * ply + 1] = thread_killers16d[2 * ply];
-        thread_killers16d[2 * ply] = mv;
+    if (thread_killers16[2 * ply] != mv) {
+        thread_killers16[2 * ply + 1] = thread_killers16[2 * ply];
+        thread_killers16[2 * ply] = mv;
     }
 
     // Associate the countermove with the preceding opponent move.
     if (prevMove != 0) {
-        thread_counterMoves16d[prev(prevMove)][next(prevMove)] = mv;
+        thread_counterMoves16[prev(prevMove)][next(prevMove)] = mv;
     }
 }
 
-void orderMoves16d(Position* pos, int startIndex, int moveCount, uint64_t pvMove, uint16_t ttMove, uint64_t prevMove) {
+void orderMoves16(Position* pos, int startIndex, int moveCount, uint64_t pvMove, uint16_t ttMove, uint64_t prevMove) {
     if (pvMove != 0 && promoteSmallMove(pos, toSmallMove(pvMove), startIndex + 1, startIndex + moveCount)) {
         startIndex++; moveCount--;
     }
@@ -58,9 +58,9 @@ void orderMoves16d(Position* pos, int startIndex, int moveCount, uint64_t pvMove
     }
 
     int ply = pos->currentDepth;
-    uint16_t killer1 = thread_killers16d[2 * ply];
-    uint16_t killer2 = thread_killers16d[2 * ply + 1];
-    uint16_t cmMove = (prevMove != 0) ? thread_counterMoves16d[prev(prevMove)][next(prevMove)] : 0;
+    uint16_t killer1 = thread_killers16[2 * ply];
+    uint16_t killer2 = thread_killers16[2 * ply + 1];
+    uint16_t cmMove = (prevMove != 0) ? thread_counterMoves16[prev(prevMove)][next(prevMove)] : 0;
 
     for (int i = 1; i <= moveCount; i++) {
         uint64_t m = pos->moves[startIndex + i] & WITHOUT_MVSCORE_CACHE;
@@ -69,7 +69,7 @@ void orderMoves16d(Position* pos, int startIndex, int moveCount, uint64_t pvMove
         if (!isVacant(captured(m)) || !isVacant(promotion(m))) {
             int s = see(pos, m);
             if (s >= 0) {
-                m |= GOOD_CAPTURE_BONUS16d;
+                m |= GOOD_CAPTURE_BONUS16;
                 m += (((uint64_t)(s / 100)) << 41);
             }
         } else {
@@ -78,12 +78,12 @@ void orderMoves16d(Position* pos, int startIndex, int moveCount, uint64_t pvMove
             } else if (killer2 != 0 && sm == killer2) {
                 m |= KILLERMOVE2_BONUS;
             } else if (cmMove != 0 && sm == cmMove) {
-                m |= COUNTERMOVE_BONUS16d;
+                m |= COUNTERMOVE_BONUS16;
             } else {
                 int c = colorIndex(pos->board[prev(m)]);
-                int rawScore = historyTable16d[c][prev(m)][next(m)];
+                int rawScore = historyTable16[c][prev(m)][next(m)];
                 if (rawScore < 0) rawScore = 0;
-                uint64_t histBonus = (uint64_t)((rawScore * HIST_BONUS_MAX16d) / HISTORY_MAX16d);
+                uint64_t histBonus = (uint64_t)((rawScore * HIST_BONUS_MAX16) / HISTORY_MAX16);
                 m |= (histBonus << 41);
             }
         }
@@ -92,18 +92,18 @@ void orderMoves16d(Position* pos, int startIndex, int moveCount, uint64_t pvMove
     insertionSort(pos, startIndex, moveCount);
 }
 
-int quiescenceSearch16d(Position* pos, int alpha, int beta) {
+int quiescenceSearch16(Position* pos, int alpha, int beta) {
     int startIndex = 256 * pos->currentDepth;
 
     if(checkTimeOnly(pos)) return 0;
 
     uint64_t h = pos->currentHash;
-    TTEntry e = getEntry(tt16d,TT_SIZE_THREADED,h);
+    TTEntry e = getEntry(tt16,TT_SIZE_THREADED,h);
     int originalAlpha = alpha;
     if (e.key == h) {
         int stored = scoreFromTT(e.eval,pos->currentDepth);
         if (e.flag == FLAG_EXACT) {
-            thread_pvLength16d[pos->currentDepth] = 0;
+            thread_pvLength16[pos->currentDepth] = 0;
             return stored;
         } else if (e.flag == FLAG_BETA && alpha < stored) {
             alpha = stored;
@@ -129,7 +129,7 @@ int quiescenceSearch16d(Position* pos, int alpha, int beta) {
         // Stand-pat score.
 
         if (stand_pat >= beta) {
-            addEntry(tt16d, TT_SIZE_THREADED, h, scoreToTT(stand_pat, pos->currentDepth),
+            addEntry(tt16, TT_SIZE_THREADED, h, scoreToTT(stand_pat, pos->currentDepth),
                      0, 0, FLAG_BETA);
             return beta;
         }
@@ -146,7 +146,7 @@ int quiescenceSearch16d(Position* pos, int alpha, int beta) {
     int moveCount = (int) pos->moves[startIndex];
     bool anyLegal = false;
 
-    uint64_t pvMove = (pos->currentDepth == 0 && thread_pvLength16d[0] > 0) ? thread_pvTable16d[0] : 0;
+    uint64_t pvMove = (pos->currentDepth == 0 && thread_pvLength16[0] > 0) ? thread_pvTable16[0] : 0;
     uint16_t ttMove = (e.key == h) ? e.bestResponse : 0;
 
     moveCount = orderCapturesQS(pos, startIndex, moveCount, pvMove, ttMove);
@@ -169,7 +169,7 @@ int quiescenceSearch16d(Position* pos, int alpha, int beta) {
 
         anyLegal = true;
 
-        int score = -quiescenceSearch16d(pos, -beta, -alpha);
+        int score = -quiescenceSearch16(pos, -beta, -alpha);
 
         unmove(pos, m);
         pos->currentHash = h;
@@ -182,11 +182,11 @@ int quiescenceSearch16d(Position* pos, int alpha, int beta) {
             }
         }
         if (score >= beta) {
-            addEntry(tt16d, TT_SIZE_THREADED, pos->currentHash, scoreToTT(score, pos->currentDepth),
+            addEntry(tt16, TT_SIZE_THREADED, pos->currentHash, scoreToTT(score, pos->currentDepth),
                      toSmallMove(m), 0, FLAG_BETA);
 
-            thread_pvTable16d[pos->currentDepth * MAX_DEPTH] = m;
-            thread_pvLength16d[pos->currentDepth] = 1;
+            thread_pvTable16[pos->currentDepth * MAX_DEPTH] = m;
+            thread_pvLength16[pos->currentDepth] = 1;
             return res;
         }
     }
@@ -196,11 +196,11 @@ int quiescenceSearch16d(Position* pos, int alpha, int beta) {
     }
 
     uint8_t flag = (res <= originalAlpha) ? FLAG_ALPHA : FLAG_EXACT;
-    addEntry(tt16d, TT_SIZE_THREADED, h, scoreToTT(res, pos->currentDepth), 0, 0, flag);
+    addEntry(tt16, TT_SIZE_THREADED, h, scoreToTT(res, pos->currentDepth), 0, 0, flag);
     return res;
 }
 
-int search16d(Position* pos, int depth, int alpha, int beta, bool allowNull, uint64_t prevMove, uint16_t excludedMove){
+int search16(Position* pos, int depth, int alpha, int beta, bool allowNull, uint64_t prevMove, uint16_t excludedMove){
     int startIndex = 256 * pos->currentDepth;
 
     if (pos->currentDepth >= MAX_DEPTH - 1) {
@@ -210,13 +210,13 @@ int search16d(Position* pos, int depth, int alpha, int beta, bool allowNull, uin
     if (checkStopConditions(pos)) return 0;
 
     uint64_t h = pos->currentHash;
-    TTEntry e = getEntry(tt16d, TT_SIZE_THREADED, h);
+    TTEntry e = getEntry(tt16, TT_SIZE_THREADED, h);
 
     int originalAlpha = alpha;
     if (excludedMove == 0 && e.key == h && e.depth >= depth) {
         int storedScore = scoreFromTT(e.eval,pos->currentDepth);
         if (e.flag == FLAG_EXACT) {
-            cpt16d++;
+            cpt16++;
             return storedScore;
         } else if (e.flag == FLAG_BETA && alpha < storedScore) {
             alpha =storedScore;
@@ -229,7 +229,7 @@ int search16d(Position* pos, int depth, int alpha, int beta, bool allowNull, uin
     }
 
     if(depth <= 0) {
-        int res = quiescenceSearch16d(pos,alpha, beta);
+        int res = quiescenceSearch16(pos,alpha, beta);
         return res;
     }
     bool inCheck = isInCheck(pos);
@@ -241,7 +241,7 @@ int search16d(Position* pos, int depth, int alpha, int beta, bool allowNull, uin
     if (depth == 1 && !inCheck && abs(beta) < MATE_THRESHOLD) {
         int se = eval(pos);
         if (se + 300 <= alpha) {
-            int score = quiescenceSearch16d(pos, alpha, beta);
+            int score = quiescenceSearch16(pos, alpha, beta);
             if (score <= alpha) return score; // Prune only after the reduced search confirms fail-low.
         }
     }
@@ -262,10 +262,10 @@ int search16d(Position* pos, int depth, int alpha, int beta, bool allowNull, uin
         }
     }
 
-    if (allowNull && depth - 1 - NULL_MOVE_CONST16d >= 0 && !inCheck && hasNonPawnMaterial(pos)) {
+    if (allowNull && depth - 1 - NULL_MOVE_CONST16 >= 0 && !inCheck && hasNonPawnMaterial(pos)) {
         NullMoveState nms;
         makeNullMove(pos, &nms);
-        int nmScore = -search16d(pos, depth - 1 - NULL_MOVE_CONST16d, -beta, -beta + 1, false,0,0);
+        int nmScore = -search16(pos, depth - 1 - NULL_MOVE_CONST16, -beta, -beta + 1, false,0,0);
         unmakeNullMove(pos, &nms);
         if (nmScore >= beta) return beta;
     }
@@ -278,7 +278,7 @@ int search16d(Position* pos, int depth, int alpha, int beta, bool allowNull, uin
         int singularDepth = (depth - 1) / 2;
 
         // Search at reduced depth with the TT move excluded.
-        int sScore = search16d(pos, singularDepth, singularBeta - 1, singularBeta, false, prevMove, ttMove);
+        int sScore = search16(pos, singularDepth, singularBeta - 1, singularBeta, false, prevMove, ttMove);
 
         // Extend the TT move when alternatives fail below singularBeta.
         if (sScore < singularBeta) {
@@ -296,10 +296,10 @@ int search16d(Position* pos, int depth, int alpha, int beta, bool allowNull, uin
     }
 
     int ply = pos->currentDepth;
-    uint64_t pvMove = thread_pvLength16d[ply] > 0 ? thread_pvTable16d[ply * MAX_DEPTH] : 0;
-    thread_pvLength16d[pos->currentDepth] = 0;
+    uint64_t pvMove = thread_pvLength16[ply] > 0 ? thread_pvTable16[ply * MAX_DEPTH] : 0;
+    thread_pvLength16[pos->currentDepth] = 0;
 
-    orderMoves16d(pos,startIndex,moveCount,pvMove,ttMove,prevMove);
+    orderMoves16(pos,startIndex,moveCount,pvMove,ttMove,prevMove);
 
     uint64_t bestResponse = pos->moves[startIndex+1];
     uint64_t hash = pos->currentHash;
@@ -321,7 +321,7 @@ int search16d(Position* pos, int depth, int alpha, int beta, bool allowNull, uin
         }
 
         bool isQuiet = isVacant(captured(m)) && isVacant(promotion(m));
-        bool isKiller = (toSmallMove(m) == thread_killers16d[2 * ply]) || (toSmallMove(m) == thread_killers16d[2 * ply + 1]);
+        bool isKiller = (toSmallMove(m) == thread_killers16[2 * ply]) || (toSmallMove(m) == thread_killers16[2 * ply + 1]);
 
         move(pos,m);
         pos->currentDepth++;
@@ -361,16 +361,16 @@ int search16d(Position* pos, int depth, int alpha, int beta, bool allowNull, uin
             if(toSmallMove(m) == ttMove){
                 ext += singularExtension;
             }
-            score = -search16d(pos, depth - 1 + ext, -beta, -alpha, true, m, 0);
+            score = -search16(pos, depth - 1 + ext, -beta, -alpha, true, m, 0);
             isFirstMove = false;
         } else {
             int reduction = 0;
             // Reduce late moves before a full-depth re-search.
-            bool isBadCapture = !isVacant(captured(m)) && !(m & GOOD_CAPTURE_BONUS16d);
+            bool isBadCapture = !isVacant(captured(m)) && !(m & GOOD_CAPTURE_BONUS16);
 
             if (!inCheck && depth >= 3 && i >= 3 && (isQuiet || isBadCapture) &&
-                toSmallMove(m) != thread_killers16d[2 * ply] &&
-                toSmallMove(m) != thread_killers16d[2 * ply + 1]) {
+                toSmallMove(m) != thread_killers16[2 * ply] &&
+                toSmallMove(m) != thread_killers16[2 * ply + 1]) {
 
                 int k = (i > 255) ? 255 : i;
                 reduction = lmrDepth[k];
@@ -378,9 +378,9 @@ int search16d(Position* pos, int depth, int alpha, int beta, bool allowNull, uin
                 if (isQuiet) {
                     // Adjust quiet-move reductions using history.
                    int c = colorIndex(pos->board[prev(m)]);
-                    int hist = historyTable16d[c][prev(m)][next(m)];
-                    if (hist > (HISTORY_MAX16d / 2)) reduction--;
-                    else if (hist < (HISTORY_MAX16d / 8)) reduction++;
+                    int hist = historyTable16[c][prev(m)][next(m)];
+                    if (hist > (HISTORY_MAX16 / 2)) reduction--;
+                    else if (hist < (HISTORY_MAX16 / 8)) reduction++;
                 } else {
                     // Bad captures do not use quiet-move history.
 
@@ -392,16 +392,16 @@ int search16d(Position* pos, int depth, int alpha, int beta, bool allowNull, uin
             }
 
             // 2. Reduced depth, null-window search
-            score = -search16d(pos, depth - 1 - reduction + extension, -alpha - 1, -alpha, true,m,0);
+            score = -search16(pos, depth - 1 - reduction + extension, -alpha - 1, -alpha, true,m,0);
 
             // 3. If it failed high AND we reduced it, re-search at full depth (null-window)
             if (score > alpha && reduction > 0) {
-                score = -search16d(pos, depth - 1 + extension, -alpha - 1, -alpha, true,m,0);
+                score = -search16(pos, depth - 1 + extension, -alpha - 1, -alpha, true,m,0);
             }
 
             // 4. PVS Re-search (exact window) if it improved alpha
             if (score > alpha && score < beta) {
-                score = -search16d(pos, depth - 1 + extension, -beta, -alpha, true,m,0);
+                score = -search16(pos, depth - 1 + extension, -beta, -alpha, true,m,0);
             }
         }
 
@@ -414,18 +414,18 @@ int search16d(Position* pos, int depth, int alpha, int beta, bool allowNull, uin
             bestResponse = m;
             if(score > alpha){
                 alpha = score;
-                if(excludedMove == 0) updatePV(thread_pvTable16d, thread_pvLength16d, pos->currentDepth, m);
+                if(excludedMove == 0) updatePV(thread_pvTable16, thread_pvLength16, pos->currentDepth, m);
             }
         }
         if (score >= beta){
             if (isQuiet) {
                 numQuiets--; // Exclude the cutoff move from the history penalties.
-                updateHistoryKillersAndCounter16d(pos, m, depth, quietsSearched, numQuiets, prevMove);
+                updateHistoryKillersAndCounter16(pos, m, depth, quietsSearched, numQuiets, prevMove);
             }
             if(excludedMove == 0){
-                addEntry(tt16d, TT_SIZE_THREADED, pos->currentHash, scoreToTT(score, pos->currentDepth), toSmallMove(m), (uint8_t) depth, FLAG_BETA);
-                thread_pvTable16d[pos->currentDepth * MAX_DEPTH] = m;
-                thread_pvLength16d[pos->currentDepth] = 1;
+                addEntry(tt16, TT_SIZE_THREADED, pos->currentHash, scoreToTT(score, pos->currentDepth), toSmallMove(m), (uint8_t) depth, FLAG_BETA);
+                thread_pvTable16[pos->currentDepth * MAX_DEPTH] = m;
+                thread_pvLength16[pos->currentDepth] = 1;
             }
             return res;
         }
@@ -436,19 +436,19 @@ int search16d(Position* pos, int depth, int alpha, int beta, bool allowNull, uin
     }
     if (res <= originalAlpha && excludedMove == 0) {
         uint16_t moveOrKeep = (e.key == h) ? e.bestResponse : 0;
-        addEntry(tt16d, TT_SIZE_THREADED, h, scoreToTT(res, pos->currentDepth), moveOrKeep, (uint8_t)depth, FLAG_ALPHA);
+        addEntry(tt16, TT_SIZE_THREADED, h, scoreToTT(res, pos->currentDepth), moveOrKeep, (uint8_t)depth, FLAG_ALPHA);
     } else if (excludedMove == 0) {
-        addEntry(tt16d, TT_SIZE_THREADED, h, scoreToTT(res, pos->currentDepth), toSmallMove(bestResponse), (uint8_t)depth, FLAG_EXACT);
+        addEntry(tt16, TT_SIZE_THREADED, h, scoreToTT(res, pos->currentDepth), toSmallMove(bestResponse), (uint8_t)depth, FLAG_EXACT);
     }
     return res;
 }
 
-uint64_t getBestMoveTime16d(Position* pos,time_t limit){
+uint64_t getBestMoveTime16(Position* pos,time_t limit){
 
-    if(inBook16d){
+    if(inBook16){
         uint64_t bookMove = makeFromOpeningMove(pos);
         if(bookMove == 0){
-            inBook16d = false;
+            inBook16 = false;
         } else {
             printf("Opening-book move.\n\n\n");
             return bookMove;
@@ -460,12 +460,12 @@ uint64_t getBestMoveTime16d(Position* pos,time_t limit){
     pos->stopSearch = false;
     pos->nodeCount = 0;
     pos->currentDepth = 0;
-    cpt16d = 0;
-    thread_pvLength16d[0] = 0;
+    cpt16 = 0;
+    thread_pvLength16[0] = 0;
 
-    memset(historyTable16d, 0, sizeof(historyTable16d));
-    memset(thread_killers16d, 0, sizeof(thread_killers16d));
-    memset(thread_counterMoves16d, 0, sizeof(thread_counterMoves16d));
+    memset(historyTable16, 0, sizeof(historyTable16));
+    memset(thread_killers16, 0, sizeof(thread_killers16));
+    memset(thread_counterMoves16, 0, sizeof(thread_counterMoves16));
 
     generateMoves(pos);
     int moveCount = (int) pos->moves[0] ;
@@ -475,7 +475,7 @@ uint64_t getBestMoveTime16d(Position* pos,time_t limit){
     uint64_t bestMove = pos->moves[1];
 
     for (int depth = 1; depth <= 64; depth++) {
-        int delta = ASPIRATION_WINDOW16d;
+        int delta = ASPIRATION_WINDOW16;
         int alpha = -INF;
         int beta = INF;
 
@@ -492,10 +492,10 @@ uint64_t getBestMoveTime16d(Position* pos,time_t limit){
             int origBeta = beta;
 
             uint64_t h0 = pos->currentHash;
-            TTEntry e0 = getEntry(tt16d, TT_SIZE_THREADED, h0);
-            uint64_t pvMove = (thread_pvLength16d[0] > 0) ? thread_pvTable16d[0] : 0;
+            TTEntry e0 = getEntry(tt16, TT_SIZE_THREADED, h0);
+            uint64_t pvMove = (thread_pvLength16[0] > 0) ? thread_pvTable16[0] : 0;
             uint16_t ttMove = (e0.key == h0) ? e0.bestResponse : 0;
-            orderMoves16d(pos, 0, moveCount, pvMove, ttMove,0);
+            orderMoves16(pos, 0, moveCount, pvMove, ttMove,0);
 
             int currentScore = -INF;
             bool isFirstMove = true;
@@ -508,12 +508,12 @@ uint64_t getBestMoveTime16d(Position* pos,time_t limit){
 
                 int s;
                 if (isFirstMove) {
-                    s = -search16d(pos, depth - 1, -beta, -alpha, true,m,0);
+                    s = -search16(pos, depth - 1, -beta, -alpha, true,m,0);
                     isFirstMove = false;
                 } else {
-                    s = -search16d(pos, depth - 1, -alpha - 1, -alpha, true,m,0);
+                    s = -search16(pos, depth - 1, -alpha - 1, -alpha, true,m,0);
                     if (s > alpha && s < beta) {
-                        s = -search16d(pos, depth - 1, -beta, -alpha, true,m,0);
+                        s = -search16(pos, depth - 1, -beta, -alpha, true,m,0);
                     }
                 }
 
@@ -528,7 +528,7 @@ uint64_t getBestMoveTime16d(Position* pos,time_t limit){
                 if (s > alpha) {
                     alpha = s;
                     candidate = m;
-                    updatePV(thread_pvTable16d, thread_pvLength16d, 0, m);
+                    updatePV(thread_pvTable16, thread_pvLength16, 0, m);
                 }
             }
 

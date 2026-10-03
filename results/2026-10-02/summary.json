@@ -1,0 +1,1372 @@
+[
+  {
+    "version": 10,
+    "performance": {
+      "searches": 24,
+      "nps": 3413322.834597861,
+      "mean_depth": 12.875,
+      "median_depth": 9.5,
+      "mean_depth_per_second": 12.744584274996393,
+      "mean_elapsed_ms": 1010.1534
+    },
+    "fixed": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 41,
+      "draws": 186,
+      "losses": 273,
+      "score": 0.268,
+      "elo": -174.5505148118412,
+      "score_ci95": [
+        0.24,
+        0.298
+      ],
+      "elo_ci95": [
+        -200.24094022767414,
+        -148.84833922142
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 314,
+        "THREEFOLD_REPETITION": 158,
+        "FIFTY_MOVES": 15,
+        "INSUFFICIENT_MATERIAL": 11,
+        "STALEMATE": 2
+      },
+      "reference_elo": 2700,
+      "calibrated_elo_estimate": 2525.4494851881586
+    },
+    "pilot": [
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 3,
+        "draws": 6,
+        "losses": 11,
+        "score": 0.3,
+        "elo": -147.19071411783776,
+        "score_ci95": [
+          0.175,
+          0.425
+        ],
+        "elo_ci95": [
+          -269.36635994545225,
+          -52.51156585572756
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 14,
+          "THREEFOLD_REPETITION": 5,
+          "INSUFFICIENT_MATERIAL": 1
+        },
+        "reference_elo": 2700,
+        "calibrated_elo_estimate": 2552.8092858821624
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 5,
+        "draws": 8,
+        "losses": 7,
+        "score": 0.45,
+        "elo": -34.86007028756008,
+        "score_ci95": [
+          0.325,
+          0.575
+        ],
+        "elo_ci95": [
+          -126.96816474086023,
+          52.51156585572756
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 12,
+          "THREEFOLD_REPETITION": 7,
+          "FIFTY_MOVES": 1
+        },
+        "reference_elo": 2553,
+        "calibrated_elo_estimate": 2518.13992971244
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 6,
+        "draws": 6,
+        "losses": 8,
+        "score": 0.45,
+        "elo": -34.86007028756008,
+        "score_ci95": [
+          0.3,
+          0.625
+        ],
+        "elo_ci95": [
+          -147.19071411783776,
+          88.73949984654256
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 14,
+          "FIFTY_MOVES": 1,
+          "INSUFFICIENT_MATERIAL": 1,
+          "THREEFOLD_REPETITION": 4
+        },
+        "reference_elo": 2518,
+        "calibrated_elo_estimate": 2483.13992971244
+      }
+    ],
+    "adjusted": {
+      "pairs": 249,
+      "games": 498,
+      "excluded_pairs": 1,
+      "wins": 147,
+      "draws": 155,
+      "losses": 196,
+      "score": 0.4508032128514056,
+      "elo": -34.29639413204302,
+      "score_ci95": [
+        0.41365461847389556,
+        0.48694779116465864
+      ],
+      "elo_ci95": [
+        -60.60625243170594,
+        -9.071664612979609
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "FIFTY_MOVES": 12,
+        "THREEFOLD_REPETITION": 131,
+        "CHECKMATE": 344,
+        "STALEMATE": 1,
+        "INSUFFICIENT_MATERIAL": 11,
+        "ply limit (unfinished)": 1
+      },
+      "reference_elo": 2483,
+      "calibrated_elo_estimate": 2448.703605867957
+    }
+  },
+  {
+    "version": 11,
+    "performance": {
+      "searches": 24,
+      "nps": 4067216.8478768044,
+      "mean_depth": 14.041666666666666,
+      "median_depth": 11.0,
+      "mean_depth_per_second": 13.885543210025178,
+      "mean_elapsed_ms": 1011.1683625000001
+    },
+    "fixed": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 90,
+      "draws": 159,
+      "losses": 251,
+      "score": 0.339,
+      "elo": -116.00070451302322,
+      "score_ci95": [
+        0.305,
+        0.375
+      ],
+      "elo_ci95": [
+        -143.07398609733124,
+        -88.73949984654256
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "INSUFFICIENT_MATERIAL": 12,
+        "CHECKMATE": 341,
+        "THREEFOLD_REPETITION": 139,
+        "FIFTY_MOVES": 7,
+        "STALEMATE": 1
+      },
+      "reference_elo": 2700,
+      "calibrated_elo_estimate": 2583.9992954869767
+    },
+    "previous": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 302,
+      "draws": 112,
+      "losses": 86,
+      "score": 0.716,
+      "elo": 160.63787290432714,
+      "score_ci95": [
+        0.681,
+        0.75
+      ],
+      "elo_ci95": [
+        131.74257154224165,
+        190.84850188786498
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 388,
+        "INSUFFICIENT_MATERIAL": 23,
+        "THREEFOLD_REPETITION": 79,
+        "STALEMATE": 2,
+        "FIFTY_MOVES": 8
+      },
+      "reference_elo": null,
+      "calibrated_elo_estimate": null
+    },
+    "pilot": [
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 3,
+        "draws": 6,
+        "losses": 11,
+        "score": 0.3,
+        "elo": -147.19071411783776,
+        "score_ci95": [
+          0.15,
+          0.475
+        ],
+        "elo_ci95": [
+          -301.33106666344463,
+          -17.386277512436145
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 14,
+          "THREEFOLD_REPETITION": 5,
+          "INSUFFICIENT_MATERIAL": 1
+        },
+        "reference_elo": 2700,
+        "calibrated_elo_estimate": 2552.8092858821624
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 5,
+        "draws": 4,
+        "losses": 11,
+        "score": 0.35,
+        "elo": -107.53812491703198,
+        "score_ci95": [
+          0.175,
+          0.525
+        ],
+        "elo_ci95": [
+          -269.36635994545225,
+          17.386277512436138
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 16,
+          "THREEFOLD_REPETITION": 4
+        },
+        "reference_elo": 2553,
+        "calibrated_elo_estimate": 2445.461875082968
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 12,
+        "draws": 4,
+        "losses": 4,
+        "score": 0.7,
+        "elo": 147.19071411783773,
+        "score_ci95": [
+          0.475,
+          0.875
+        ],
+        "elo_ci95": [
+          -17.386277512436145,
+          338.0392160057027
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 16,
+          "THREEFOLD_REPETITION": 4
+        },
+        "reference_elo": 2445,
+        "calibrated_elo_estimate": 2592.1907141178376
+      }
+    ],
+    "adjusted": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 140,
+      "draws": 174,
+      "losses": 186,
+      "score": 0.454,
+      "elo": -32.05471593905334,
+      "score_ci95": [
+        0.418,
+        0.488
+      ],
+      "elo_ci95": [
+        -57.49868114994135,
+        -8.340055589248054
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "THREEFOLD_REPETITION": 140,
+        "CHECKMATE": 326,
+        "FIFTY_MOVES": 20,
+        "INSUFFICIENT_MATERIAL": 13,
+        "STALEMATE": 1
+      },
+      "reference_elo": 2592,
+      "calibrated_elo_estimate": 2559.9452840609465
+    }
+  },
+  {
+    "version": 12,
+    "performance": {
+      "searches": 24,
+      "nps": 4406992.648051303,
+      "mean_depth": 14.625,
+      "median_depth": 11.0,
+      "mean_depth_per_second": 14.468562653085767,
+      "mean_elapsed_ms": 1010.7575291666667
+    },
+    "fixed": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 101,
+      "draws": 177,
+      "losses": 222,
+      "score": 0.379,
+      "elo": -85.78095608340313,
+      "score_ci95": [
+        0.346,
+        0.416
+      ],
+      "elo_ci95": [
+        -110.6006598125963,
+        -58.927806594262734
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 323,
+        "THREEFOLD_REPETITION": 144,
+        "INSUFFICIENT_MATERIAL": 16,
+        "FIFTY_MOVES": 16,
+        "STALEMATE": 1
+      },
+      "reference_elo": 2700,
+      "calibrated_elo_estimate": 2614.219043916597
+    },
+    "previous": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 190,
+      "draws": 131,
+      "losses": 179,
+      "score": 0.511,
+      "elo": 7.644816404437001,
+      "score_ci95": [
+        0.476,
+        0.548
+      ],
+      "elo_ci95": [
+        -16.689733705293406,
+        33.456849469194836
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 369,
+        "INSUFFICIENT_MATERIAL": 30,
+        "THREEFOLD_REPETITION": 89,
+        "FIFTY_MOVES": 12
+      },
+      "reference_elo": null,
+      "calibrated_elo_estimate": null
+    },
+    "pilot": [
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 4,
+        "draws": 9,
+        "losses": 7,
+        "score": 0.425,
+        "elo": -52.51156585572756,
+        "score_ci95": [
+          0.25,
+          0.6
+        ],
+        "elo_ci95": [
+          -190.84850188786498,
+          70.43650362227247
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 11,
+          "THREEFOLD_REPETITION": 7,
+          "FIFTY_MOVES": 2
+        },
+        "reference_elo": 2700,
+        "calibrated_elo_estimate": 2647.4884341442726
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 5,
+        "draws": 4,
+        "losses": 11,
+        "score": 0.35,
+        "elo": -107.53812491703198,
+        "score_ci95": [
+          0.175,
+          0.525
+        ],
+        "elo_ci95": [
+          -269.36635994545225,
+          17.386277512436138
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 16,
+          "THREEFOLD_REPETITION": 3,
+          "INSUFFICIENT_MATERIAL": 1
+        },
+        "reference_elo": 2647,
+        "calibrated_elo_estimate": 2539.461875082968
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 8,
+        "draws": 2,
+        "losses": 10,
+        "score": 0.45,
+        "elo": -34.86007028756008,
+        "score_ci95": [
+          0.275,
+          0.625
+        ],
+        "elo_ci95": [
+          -168.4021250962924,
+          88.73949984654256
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 18,
+          "FIFTY_MOVES": 1,
+          "THREEFOLD_REPETITION": 1
+        },
+        "reference_elo": 2539,
+        "calibrated_elo_estimate": 2504.13992971244
+      }
+    ],
+    "adjusted": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 243,
+      "draws": 118,
+      "losses": 139,
+      "score": 0.604,
+      "elo": 73.33670107824778,
+      "score_ci95": [
+        0.564,
+        0.644
+      ],
+      "elo_ci95": [
+        44.71704588590248,
+        102.97434775477478
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "INSUFFICIENT_MATERIAL": 12,
+        "CHECKMATE": 382,
+        "THREEFOLD_REPETITION": 89,
+        "FIFTY_MOVES": 16,
+        "STALEMATE": 1
+      },
+      "reference_elo": 2504,
+      "calibrated_elo_estimate": 2577.3367010782476
+    }
+  },
+  {
+    "version": 13,
+    "performance": {
+      "searches": 24,
+      "nps": 4087999.8154052873,
+      "mean_depth": 15.75,
+      "median_depth": 13.5,
+      "mean_depth_per_second": 15.58609623582547,
+      "mean_elapsed_ms": 1010.6826125
+    },
+    "fixed": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 90,
+      "draws": 154,
+      "losses": 256,
+      "score": 0.334,
+      "elo": -119.8911049434946,
+      "score_ci95": [
+        0.298,
+        0.37
+      ],
+      "elo_ci95": [
+        -148.84833922142,
+        -92.45553015463469
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 346,
+        "THREEFOLD_REPETITION": 129,
+        "FIFTY_MOVES": 12,
+        "INSUFFICIENT_MATERIAL": 12,
+        "STALEMATE": 1
+      },
+      "reference_elo": 2700,
+      "calibrated_elo_estimate": 2580.1088950565054
+    },
+    "previous": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 194,
+      "draws": 127,
+      "losses": 179,
+      "score": 0.515,
+      "elo": 10.426196175570942,
+      "score_ci95": [
+        0.479,
+        0.553
+      ],
+      "elo_ci95": [
+        -14.600883953984505,
+        36.96704326910475
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 373,
+        "STALEMATE": 2,
+        "THREEFOLD_REPETITION": 88,
+        "FIFTY_MOVES": 10,
+        "INSUFFICIENT_MATERIAL": 27
+      },
+      "reference_elo": null,
+      "calibrated_elo_estimate": null
+    },
+    "pilot": [
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 4,
+        "draws": 7,
+        "losses": 9,
+        "score": 0.375,
+        "elo": -88.73949984654256,
+        "score_ci95": [
+          0.225,
+          0.525
+        ],
+        "elo_ci95": [
+          -214.8476737579791,
+          17.386277512436138
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 13,
+          "THREEFOLD_REPETITION": 5,
+          "FIFTY_MOVES": 2
+        },
+        "reference_elo": 2700,
+        "calibrated_elo_estimate": 2611.2605001534575
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 5,
+        "draws": 7,
+        "losses": 8,
+        "score": 0.425,
+        "elo": -52.51156585572756,
+        "score_ci95": [
+          0.225,
+          0.625
+        ],
+        "elo_ci95": [
+          -214.8476737579791,
+          88.73949984654256
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "THREEFOLD_REPETITION": 6,
+          "INSUFFICIENT_MATERIAL": 1,
+          "CHECKMATE": 13
+        },
+        "reference_elo": 2611,
+        "calibrated_elo_estimate": 2558.4884341442726
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 6,
+        "draws": 4,
+        "losses": 10,
+        "score": 0.4,
+        "elo": -70.43650362227247,
+        "score_ci95": [
+          0.225,
+          0.55
+        ],
+        "elo_ci95": [
+          -214.8476737579791,
+          34.86007028756011
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 16,
+          "THREEFOLD_REPETITION": 4
+        },
+        "reference_elo": 2558,
+        "calibrated_elo_estimate": 2487.5634963777275
+      }
+    ],
+    "adjusted": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 227,
+      "draws": 119,
+      "losses": 154,
+      "score": 0.573,
+      "elo": 51.09069877694641,
+      "score_ci95": [
+        0.538,
+        0.612
+      ],
+      "elo_ci95": [
+        26.456120044105496,
+        79.16787862054157
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 381,
+        "FIFTY_MOVES": 15,
+        "INSUFFICIENT_MATERIAL": 10,
+        "THREEFOLD_REPETITION": 94
+      },
+      "reference_elo": 2488,
+      "calibrated_elo_estimate": 2539.0906987769463
+    }
+  },
+  {
+    "version": 14,
+    "performance": {
+      "searches": 24,
+      "nps": 3294251.147182648,
+      "mean_depth": 16.083333333333332,
+      "median_depth": 13.5,
+      "mean_depth_per_second": 15.914537955928495,
+      "mean_elapsed_ms": 1010.5300166666667
+    },
+    "fixed": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 84,
+      "draws": 154,
+      "losses": 262,
+      "score": 0.322,
+      "elo": -129.34952886849297,
+      "score_ci95": [
+        0.288,
+        0.355
+      ],
+      "elo_ci95": [
+        -157.2350023510502,
+        -103.73254463206946
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 346,
+        "THREEFOLD_REPETITION": 115,
+        "INSUFFICIENT_MATERIAL": 22,
+        "FIFTY_MOVES": 14,
+        "STALEMATE": 3
+      },
+      "reference_elo": 2700,
+      "calibrated_elo_estimate": 2570.650471131507
+    },
+    "previous": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 242,
+      "draws": 103,
+      "losses": 155,
+      "score": 0.587,
+      "elo": 61.07521983648535,
+      "score_ci95": [
+        0.548,
+        0.625
+      ],
+      "elo_ci95": [
+        33.456849469194836,
+        88.73949984654256
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 397,
+        "THREEFOLD_REPETITION": 58,
+        "FIFTY_MOVES": 15,
+        "INSUFFICIENT_MATERIAL": 27,
+        "STALEMATE": 3
+      },
+      "reference_elo": null,
+      "calibrated_elo_estimate": null
+    },
+    "pilot": [
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 4,
+        "draws": 6,
+        "losses": 10,
+        "score": 0.35,
+        "elo": -107.53812491703198,
+        "score_ci95": [
+          0.15,
+          0.55
+        ],
+        "elo_ci95": [
+          -301.33106666344463,
+          34.86007028756011
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "THREEFOLD_REPETITION": 4,
+          "CHECKMATE": 14,
+          "FIFTY_MOVES": 2
+        },
+        "reference_elo": 2700,
+        "calibrated_elo_estimate": 2592.461875082968
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 9,
+        "draws": 6,
+        "losses": 5,
+        "score": 0.6,
+        "elo": 70.43650362227247,
+        "score_ci95": [
+          0.425,
+          0.8
+        ],
+        "elo_ci95": [
+          -52.51156585572756,
+          240.823996531185
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "THREEFOLD_REPETITION": 6,
+          "CHECKMATE": 14
+        },
+        "reference_elo": 2592,
+        "calibrated_elo_estimate": 2662.4365036222725
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 5,
+        "draws": 7,
+        "losses": 8,
+        "score": 0.425,
+        "elo": -52.51156585572756,
+        "score_ci95": [
+          0.275,
+          0.575
+        ],
+        "elo_ci95": [
+          -168.4021250962924,
+          52.51156585572756
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "FIFTY_MOVES": 2,
+          "THREEFOLD_REPETITION": 5,
+          "CHECKMATE": 13
+        },
+        "reference_elo": 2662,
+        "calibrated_elo_estimate": 2609.4884341442726
+      }
+    ],
+    "adjusted": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 128,
+      "draws": 138,
+      "losses": 234,
+      "score": 0.394,
+      "elo": -74.7905609362848,
+      "score_ci95": [
+        0.358,
+        0.432
+      ],
+      "elo_ci95": [
+        -101.46080056999158,
+        -47.54583555844274
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 361,
+        "THREEFOLD_REPETITION": 110,
+        "INSUFFICIENT_MATERIAL": 13,
+        "FIFTY_MOVES": 15,
+        "time forfeit": 1
+      },
+      "reference_elo": 2609,
+      "calibrated_elo_estimate": 2534.2094390637153
+    }
+  },
+  {
+    "version": 15,
+    "performance": {
+      "searches": 24,
+      "nps": 3001923.8526099906,
+      "mean_depth": 17.958333333333332,
+      "median_depth": 14.0,
+      "mean_depth_per_second": 17.767509542658843,
+      "mean_elapsed_ms": 1010.5807083333333
+    },
+    "fixed": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 96,
+      "draws": 200,
+      "losses": 204,
+      "score": 0.392,
+      "elo": -76.24700490091108,
+      "score_ci95": [
+        0.36,
+        0.424
+      ],
+      "elo_ci95": [
+        -99.95098928663995,
+        -53.22265073219178
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "THREEFOLD_REPETITION": 164,
+        "CHECKMATE": 300,
+        "INSUFFICIENT_MATERIAL": 15,
+        "FIFTY_MOVES": 20,
+        "STALEMATE": 1
+      },
+      "reference_elo": 2700,
+      "calibrated_elo_estimate": 2623.752995099089
+    },
+    "previous": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 251,
+      "draws": 81,
+      "losses": 168,
+      "score": 0.583,
+      "elo": 58.21299991410259,
+      "score_ci95": [
+        0.545,
+        0.621
+      ],
+      "elo_ci95": [
+        31.354042247812043,
+        85.78095608340313
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 419,
+        "THREEFOLD_REPETITION": 45,
+        "INSUFFICIENT_MATERIAL": 14,
+        "FIFTY_MOVES": 20,
+        "STALEMATE": 2
+      },
+      "reference_elo": null,
+      "calibrated_elo_estimate": null
+    },
+    "pilot": [
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 3,
+        "draws": 10,
+        "losses": 7,
+        "score": 0.4,
+        "elo": -70.43650362227247,
+        "score_ci95": [
+          0.3,
+          0.525
+        ],
+        "elo_ci95": [
+          -147.19071411783776,
+          17.386277512436138
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "THREEFOLD_REPETITION": 8,
+          "INSUFFICIENT_MATERIAL": 1,
+          "CHECKMATE": 10,
+          "FIFTY_MOVES": 1
+        },
+        "reference_elo": 2700,
+        "calibrated_elo_estimate": 2629.5634963777275
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 4,
+        "draws": 6,
+        "losses": 10,
+        "score": 0.35,
+        "elo": -107.53812491703198,
+        "score_ci95": [
+          0.175,
+          0.55
+        ],
+        "elo_ci95": [
+          -269.36635994545225,
+          34.86007028756011
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "THREEFOLD_REPETITION": 6,
+          "CHECKMATE": 14
+        },
+        "reference_elo": 2630,
+        "calibrated_elo_estimate": 2522.461875082968
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 6,
+        "draws": 8,
+        "losses": 6,
+        "score": 0.5,
+        "elo": 0.0,
+        "score_ci95": [
+          0.35,
+          0.65
+        ],
+        "elo_ci95": [
+          -107.53812491703198,
+          107.53812491703201
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 12,
+          "THREEFOLD_REPETITION": 6,
+          "FIFTY_MOVES": 1,
+          "INSUFFICIENT_MATERIAL": 1
+        },
+        "reference_elo": 2522,
+        "calibrated_elo_estimate": 2522.0
+      }
+    ],
+    "adjusted": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 199,
+      "draws": 164,
+      "losses": 137,
+      "score": 0.562,
+      "elo": 43.30488202598467,
+      "score_ci95": [
+        0.526,
+        0.596
+      ],
+      "elo_ci95": [
+        18.0829609918616,
+        67.54595785185256
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 336,
+        "THREEFOLD_REPETITION": 133,
+        "INSUFFICIENT_MATERIAL": 11,
+        "STALEMATE": 2,
+        "FIFTY_MOVES": 18
+      },
+      "reference_elo": 2522,
+      "calibrated_elo_estimate": 2565.3048820259846
+    }
+  },
+  {
+    "version": 16,
+    "performance": {
+      "searches": 24,
+      "nps": 2943394.5013784044,
+      "mean_depth": 20.291666666666668,
+      "median_depth": 15.5,
+      "mean_depth_per_second": 20.085155213892982,
+      "mean_elapsed_ms": 1010.6429833333333
+    },
+    "fixed": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 124,
+      "draws": 160,
+      "losses": 216,
+      "score": 0.408,
+      "elo": -64.66461745321597,
+      "score_ci95": [
+        0.372,
+        0.445
+      ],
+      "elo_ci95": [
+        -90.96668154211946,
+        -38.37318885669783
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 340,
+        "INSUFFICIENT_MATERIAL": 13,
+        "THREEFOLD_REPETITION": 121,
+        "FIFTY_MOVES": 25,
+        "STALEMATE": 1
+      },
+      "reference_elo": 2700,
+      "calibrated_elo_estimate": 2635.335382546784
+    },
+    "previous": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 246,
+      "draws": 80,
+      "losses": 174,
+      "score": 0.572,
+      "elo": 50.38090391194084,
+      "score_ci95": [
+        0.535,
+        0.612
+      ],
+      "elo_ci95": [
+        24.360331652509824,
+        79.16787862054157
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 420,
+        "FIFTY_MOVES": 15,
+        "THREEFOLD_REPETITION": 54,
+        "INSUFFICIENT_MATERIAL": 10,
+        "STALEMATE": 1
+      },
+      "reference_elo": null,
+      "calibrated_elo_estimate": null
+    },
+    "pilot": [
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 4,
+        "draws": 6,
+        "losses": 10,
+        "score": 0.35,
+        "elo": -107.53812491703198,
+        "score_ci95": [
+          0.15,
+          0.55
+        ],
+        "elo_ci95": [
+          -301.33106666344463,
+          34.86007028756011
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "THREEFOLD_REPETITION": 5,
+          "CHECKMATE": 13,
+          "INSUFFICIENT_MATERIAL": 1,
+          "time forfeit": 1
+        },
+        "reference_elo": 2700,
+        "calibrated_elo_estimate": 2592.461875082968
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 6,
+        "draws": 6,
+        "losses": 8,
+        "score": 0.45,
+        "elo": -34.86007028756008,
+        "score_ci95": [
+          0.275,
+          0.6
+        ],
+        "elo_ci95": [
+          -168.4021250962924,
+          70.43650362227247
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "THREEFOLD_REPETITION": 4,
+          "CHECKMATE": 14,
+          "INSUFFICIENT_MATERIAL": 2
+        },
+        "reference_elo": 2592,
+        "calibrated_elo_estimate": 2557.13992971244
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 6,
+        "draws": 4,
+        "losses": 10,
+        "score": 0.4,
+        "elo": -70.43650362227247,
+        "score_ci95": [
+          0.2,
+          0.6
+        ],
+        "elo_ci95": [
+          -240.82399653118495,
+          70.43650362227247
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 16,
+          "THREEFOLD_REPETITION": 3,
+          "FIFTY_MOVES": 1
+        },
+        "reference_elo": 2557,
+        "calibrated_elo_estimate": 2486.5634963777275
+      }
+    ],
+    "adjusted": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 236,
+      "draws": 135,
+      "losses": 129,
+      "score": 0.607,
+      "elo": 75.51845627993234,
+      "score_ci95": [
+        0.572,
+        0.643
+      ],
+      "elo_ci95": [
+        50.38090391194084,
+        102.21710272481155
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 365,
+        "STALEMATE": 4,
+        "THREEFOLD_REPETITION": 104,
+        "INSUFFICIENT_MATERIAL": 8,
+        "FIFTY_MOVES": 19
+      },
+      "reference_elo": 2487,
+      "calibrated_elo_estimate": 2562.5184562799323
+    }
+  },
+  {
+    "version": 17,
+    "performance": {
+      "searches": 24,
+      "nps": 2751797.8651859793,
+      "mean_depth": 19.75,
+      "median_depth": 15.0,
+      "mean_depth_per_second": 19.539204927911854,
+      "mean_elapsed_ms": 1010.7722791666666
+    },
+    "fixed": {
+      "pairs": 249,
+      "games": 498,
+      "excluded_pairs": 1,
+      "wins": 137,
+      "draws": 211,
+      "losses": 150,
+      "score": 0.48694779116465864,
+      "elo": -9.071664612979609,
+      "score_ci95": [
+        0.4538152610441767,
+        0.5220883534136547
+      ],
+      "elo_ci95": [
+        -32.18418595471913,
+        15.358556365722459
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 288,
+        "THREEFOLD_REPETITION": 167,
+        "FIFTY_MOVES": 25,
+        "INSUFFICIENT_MATERIAL": 17,
+        "STALEMATE": 2,
+        "ply limit (unfinished)": 1
+      },
+      "reference_elo": 2700,
+      "calibrated_elo_estimate": 2690.9283353870205
+    },
+    "previous": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 261,
+      "draws": 111,
+      "losses": 128,
+      "score": 0.633,
+      "elo": 94.6950583061063,
+      "score_ci95": [
+        0.597,
+        0.669
+      ],
+      "elo_ci95": [
+        68.26771399530384,
+        122.23924959684176
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 388,
+        "THREEFOLD_REPETITION": 67,
+        "INSUFFICIENT_MATERIAL": 13,
+        "FIFTY_MOVES": 29,
+        "STALEMATE": 2,
+        "time forfeit": 1
+      },
+      "reference_elo": null,
+      "calibrated_elo_estimate": null
+    },
+    "pilot": [
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 4,
+        "draws": 9,
+        "losses": 7,
+        "score": 0.425,
+        "elo": -52.51156585572756,
+        "score_ci95": [
+          0.3,
+          0.575
+        ],
+        "elo_ci95": [
+          -147.19071411783776,
+          52.51156585572756
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "THREEFOLD_REPETITION": 8,
+          "CHECKMATE": 11,
+          "FIFTY_MOVES": 1
+        },
+        "reference_elo": 2700,
+        "calibrated_elo_estimate": 2647.4884341442726
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 3,
+        "draws": 10,
+        "losses": 7,
+        "score": 0.4,
+        "elo": -70.43650362227247,
+        "score_ci95": [
+          0.275,
+          0.55
+        ],
+        "elo_ci95": [
+          -168.4021250962924,
+          34.86007028756011
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 10,
+          "THREEFOLD_REPETITION": 10
+        },
+        "reference_elo": 2647,
+        "calibrated_elo_estimate": 2576.5634963777275
+      },
+      {
+        "pairs": 10,
+        "games": 20,
+        "excluded_pairs": 0,
+        "wins": 8,
+        "draws": 6,
+        "losses": 6,
+        "score": 0.55,
+        "elo": 34.86007028756011,
+        "score_ci95": [
+          0.425,
+          0.7
+        ],
+        "elo_ci95": [
+          -52.51156585572756,
+          147.19071411783773
+        ],
+        "ci_method": "percentile bootstrap resampling complete color pairs",
+        "terminations": {
+          "CHECKMATE": 14,
+          "THREEFOLD_REPETITION": 6
+        },
+        "reference_elo": 2577,
+        "calibrated_elo_estimate": 2611.86007028756
+      }
+    ],
+    "adjusted": {
+      "pairs": 250,
+      "games": 500,
+      "excluded_pairs": 0,
+      "wins": 201,
+      "draws": 180,
+      "losses": 119,
+      "score": 0.582,
+      "elo": 57.49868114994129,
+      "score_ci95": [
+        0.545,
+        0.616
+      ],
+      "elo_ci95": [
+        31.354042247812043,
+        82.09979511875784
+      ],
+      "ci_method": "percentile bootstrap resampling complete color pairs",
+      "terminations": {
+        "CHECKMATE": 320,
+        "THREEFOLD_REPETITION": 146,
+        "FIFTY_MOVES": 18,
+        "INSUFFICIENT_MATERIAL": 14,
+        "STALEMATE": 2
+      },
+      "reference_elo": 2612,
+      "calibrated_elo_estimate": 2669.498681149941
+    }
+  }
+]

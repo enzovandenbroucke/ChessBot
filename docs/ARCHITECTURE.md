@@ -37,7 +37,7 @@ ordering score and the state needed to undo it. The transposition table uses a
 compact move. Move buffers, history and search data use fixed arrays to avoid
 repeated allocations during recursion.
 
-v17a's entry point is `getBestMoveDynamic17a`, with time arguments in milliseconds.
+v17's entry point is `getBestMoveDynamic17`, with time arguments in milliseconds.
 It uses iterative deepening, aspiration windows and a dynamic time budget.
 The recursive search makes pseudo-legal moves and checks legality afterward;
 the interface uses legal move generation directly.

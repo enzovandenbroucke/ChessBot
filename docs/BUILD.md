@@ -45,7 +45,7 @@ working directory. Run it from the repository root:
 .\build\Release\compare.exe
 ```
 
-Its settings are in `CompareThread.c`: v17a, 500 games, four workers,
+Its settings are in `CompareThread.c`: v17, 500 games, four workers,
 3 seconds + 50 ms per move, Stockfish at 2770 Elo. For new comparisons I use
 `metrics.ps1`, which exposes these settings as command-line options.
 

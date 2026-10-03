@@ -1,8 +1,8 @@
 # Version history
 
 I kept earlier search implementations to compare each change with the previous
-version. This repository includes v10–v17a; the earlier versions are documented
-below. The current engine is v17a, with classical evaluation.
+version. This repository includes v10–v17; the earlier versions are documented
+below. The current engine is v17, with classical evaluation.
 
 ## Development
 
@@ -32,6 +32,26 @@ The searches now share the current board and evaluation modules: v15 and v17 use
 `evalNew`, while v16 uses `eval`. I also experimented with mobility, but it isn't
 enabled in the current evaluator.
 
+I kept `ancientEvalCompute`, `tapered_eval`, `evalQS` and `evaluateMobility` for
+earlier evaluation experiments. The included searches don't call them today.
+
+## Current comparisons
+
+My [October 2026 results](../results/2026-10-02/README.md) compare all eight
+included versions under one protocol: 3 seconds + 50 ms per move, no opening
+book, paired colors, and Stockfish 18 at a fixed 2700 Elo or an adjusted setting.
+The same run measures nodes/s and completed depth with 1000 ms search budgets.
+
+v17 scored 48.7% against fixed SF, an estimated **2691 Elo** (95% interval:
+2668–2715). Against v16 it scored 63.3%, or **+95 Elo** (68–122). The small
+positive differences for v12 and v13 have intervals spanning zero, so this
+sample does not establish an improvement for those transitions.
+
+The [full tables and data](../results/2026-10-02/README.md) contain every version's
+results. [METRICS.md](METRICS.md) describes the measurement and uncertainty
+calculations. These comparisons use the shared board and evaluation modules,
+not a reconstruction of every original release.
+
 ## Earlier measurements
 
 I ran my historical tests against Stockfish 18 on an AMD Ryzen 7 3750H.
@@ -60,16 +80,11 @@ controlled comparison. They are estimates against limited-strength Stockfish,
 not tournament ratings. The current sources also don't reproduce the original
 board and evaluator for every historical version.
 
+For the historical v17 result I used `CompareThread`, SF at 2770, four workers
+and `test_pos_dataset_normal.txt`. The October 2026 benchmark uses different
+starting positions, Stockfish setup and draw arbitration. Its estimates should
+not be read as a direct gain or loss against the historical 2787 figure.
+
 Additional comparison totals from my notes are v4 vs v3 `468-425-107`, v5 vs v4
 `545-382-73`, v6 `260-553-187`, v7 `500-238-262` and v8 `477-271-252`.
 I didn't label the order of wins, draws and losses alongside those totals.
-
-## Current comparisons
-
-I use the [metrics tooling](METRICS.md) to compare the included versions under a
-common protocol, saving raw searches, games and configuration alongside the table.
-It measures matches against Stockfish and the previous version, nodes/s, and
-completed search depth at a fixed budget.
-
-I kept `ancientEvalCompute`, `tapered_eval`, `evalQS` and `evaluateMobility` for
-earlier evaluation experiments. The included searches don't call them today.
