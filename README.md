@@ -98,8 +98,10 @@ adjusted-SF estimates, median depth, depth/s and the underlying data. The
 [benchmark guide](docs/METRICS.md) explains the protocol, and the
 [version history](docs/VERSIONS.md) keeps my earlier measurements separately.
 
-I'd like to explore NNUE evaluation next and add a standalone UCI interface.
-The NNUE experiment is not included here.
+I also trained an experimental NNUE evaluator in PyTorch using Lichess position
+data and implemented inference in C with exported weights. The experimental v18
+performed worse than v17 in my tests, so v17 remains the main version. The NNUE
+prototype is not included in this repository.
 
 ## Credits
 
